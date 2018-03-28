@@ -10,6 +10,10 @@ class Pokemon
   def self.save(name, type, db)
     db.execute("INSERT INTO pokemon (name, type) VALUES (?, ?)", name, type)
   end
+  def self.find(id, db)
+  new_index = db.execute("SELECT * FROM pokemon WHERE id = ?", id).flatten
+  Pokemon.new(id: new_index[0], name: new_index[1], type: new_index[2] )
+  end
 
   # def initialize(id:, name:, type:, hp: nil, db:)
   #   @id, @name, @type, @hp, @db = id, name, type, hp, db
